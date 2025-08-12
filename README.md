@@ -1,2 +1,2 @@
-# Parser-for-Shadow-Slawe-3
+# Parser-for-Shadow-Slawe <3
 This is my first project lol
