@@ -6,14 +6,14 @@ def find_next_link(soup):
     links = soup.find_all("a", href=True)
     for link in links:
         if link.text in "Следующая глава":
-            with open("link.txt", 'w') as file:
+            with open("data/link.txt", 'w') as file:
                 file.write(f'https://telegra.ph{link.get('href')}')
                 #https://telegra.ph/Glava-2324-Hod-protivnika-05-13
             print("New link successfully write!")
             break
     return "NONE"
 def put_chapter_in_file():
-    with open("link.txt") as file:
+    with open("data/link.txt") as file:
         url = file.read()
 
     headers = {
@@ -23,9 +23,9 @@ def put_chapter_in_file():
     req = requests.get(url, headers=headers)
     src = req.text
 
-    with open("index.html", "w") as file:
+    with open("data/index.html", "w") as file:
         file.write(src)
-    with open("index.html") as file:
+    with open("data/index.html") as file:
         src = file.read()
 
     soup = BeautifulSoup(src, "lxml")
