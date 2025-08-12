@@ -1,6 +1,7 @@
 import requests
-from docx import Document
+#from docx import Document
 from bs4 import BeautifulSoup
+#import os
 
 def find_next_link(soup):
     links = soup.find_all("a", href=True)
@@ -10,7 +11,7 @@ def find_next_link(soup):
                 file.write(f'https://telegra.ph{link.get('href')}')
                 #https://telegra.ph/Glava-2324-Hod-protivnika-05-13
             print("New link successfully write!")
-            break
+            return "NOT_NONE_LOL"
     return "NONE"
 def put_chapter_in_file():
     with open("data/link.txt") as file:
@@ -33,12 +34,21 @@ def put_chapter_in_file():
     chap_title = soup.find(class_="tl_article_content").find("h1")
     chap_text = soup.find(class_="tl_article_content").find_all("p")
 
-find_next_link(soup)
-"""print(chap_title.text.upper(),'\n')
+    with open("data/test.txt", "a") as file:
+        file.write(f'{chap_title.text.upper()}\n')
+        for text_line in chap_text:
+            filtered_line = text_line.text
+            if filtered_line != '\n' and filtered_line not in "Предыдущая глава Следующая глава":
+                file.write(f'{filtered_line}\n')
+        file.write('\n')
+        print(chap_title.text.upper(), ' recorded successfully!\n')
+    return soup
 
-for text_line in chap_text:
-    filtered_line = text_line.text
-    if filtered_line != '\n' and filtered_line not in "Предыдущая глава Следующая глава":
-        print(filtered_line)"""
+while True:
+    soup = put_chapter_in_file()
+    if find_next_link(soup) == "NONE":
+        print('popa')
+        break
+
 
 
