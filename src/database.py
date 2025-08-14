@@ -12,7 +12,7 @@ class Base(DeclarativeBase):
 class Chapter(Base):
     __tablename__ = "Chapters"
     id: Mapped[int] = mapped_column(primary_key=True)
-    chapter_id: Mapped[int]
+    chapter_id: Mapped[int] = mapped_column(unique=True)
     title: Mapped[str]
     link: Mapped[Optional[str]]
     file_path: Mapped[Optional[str]]
